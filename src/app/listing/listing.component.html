@@ -1,0 +1,40 @@
+<div class="card" style="width: 1200px">
+    <h3>Listing Invoice</h3>
+    <div class="card-header">
+        <a class="btn btn-success" routerLink="createinvoice">Create New [+]</a>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-bordered">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <td>Invoice No</td>
+                    <td>Customer</td>
+                    <td>Remarks</td>
+                    <td>Total</td>
+                    <td>Tax</td>
+                    <td>NetTotal</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+<tr *ngFor="let item of Invoiceheader">
+    <td>{{item.invoiceNo}}</td>
+    <td>{{item.customerName}}</td>
+    <td>{{item.remarks}}</td>
+    <td>{{item.total | currency}}</td>
+    <td>{{item.tax | currency}}</td>
+    <td>{{item.netTotal | currency}}</td>
+    <td style="width: 15%">
+<a class="btn btn-primary" (click)="Editinvoice(item.invoiceNo)">Edit</a> | 
+<a class="btn btn-danger" (click)="invoiceremove(item.invoiceNo)">Delete</a>
+    </td>
+
+</tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

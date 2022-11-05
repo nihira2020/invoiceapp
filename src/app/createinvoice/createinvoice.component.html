@@ -1,0 +1,129 @@
+<form class="container" [formGroup]="invoiceform" (ngSubmit)="SaveInvoice()">
+    <div class="card" style="width: 1200px">
+        <h3>{{pagetitle}}</h3>
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Invoice No</label>
+                        <span class="text-danger">*</span>
+                        <input formControlName="invoiceNo" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Customer</label>
+                        <span class="text-danger">*</span>
+                        <select formControlName="customerId" (change)="customerchange()" class="form-control">
+                            <option *ngFor="let item of mastercustomer" [value]="item.code">
+                                {{item.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea formControlName="deliveryAddress" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Remarks</label>
+                        <textarea formControlName="remarks" class="form-control"></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-bordered" formArrayName="details">
+
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <td>Sl.No</td>
+                                <td style="width: 20%">Product Code</td>
+                                <td>Description</td>
+                                <td>Qty</td>
+                                <td>Price</td>
+                                <td>Total</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of invproducts.controls;let i=index" [formGroupName]="i">
+                                <td>{{i+1}}</td>
+                                <td>
+                                    <select class="form-control" (change)="productchange(i)" formControlName="productCode">
+                                        <option *ngFor="let item of masterproduct" [value]="item.code">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input class="form-control" formControlName="productName" />
+                                </td>
+                                <td>
+                                    <input class="form-control" (change)="Itemcalculation(i)" formControlName="qty" />
+                                </td>
+                                <td>
+                                    <input class="form-control" (change)="Itemcalculation(i)" formControlName="salesPrice" />
+                                </td>
+                                <td>
+                                    <input class="form-control" formControlName="total" />
+                                </td>
+                                <td>
+                                    <a (click)="Removeproduct(i)" class="btn btn-danger">Remove</a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">
+                                    <a (click)="addnewproduct()" class="btn btn-success">[+]</a>
+                                </td>
+                            </tr>
+                        </tfoot>
+
+                    </table>
+                </div>
+
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Summary Total</label>
+                        <input formControlName="total" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Summary Tax</label>
+                        <input formControlName="tax" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Summary NetTotal</label>
+                        <input formControlName="netTotal" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <br>
+                    <button class="btn btn-success" type="submit">Save</button> | 
+                    <a class="btn btn-danger" routerLink="/">Back</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</form>
