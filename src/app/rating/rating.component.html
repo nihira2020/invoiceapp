@@ -1,1 +1,8 @@
-<p>rating works!</p>
+<h1>Input Rating</h1>
+<ngb-rating [max]="5" (click)="GetRating()" [formControl]="ratingcontrol"></ngb-rating>
+
+
+<h1>OutPut Rating</h1>
+<ngb-rating [max]="5" [rate]="Finalrating" [readonly]="true"></ngb-rating>
+<h2>{{Finalrating}}</h2>
+<h2>Rating from {{ratingcount}} users</h2>
