@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MasterService } from '../service/master.service';
 import { ToastrService } from 'ngx-toastr'
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-listing',
@@ -10,9 +11,13 @@ import { Router } from '@angular/router';
 })
 export class ListingComponent implements OnInit {
 
-  constructor(private service: MasterService, private alert: ToastrService, private router: Router) { }
+  constructor(private service: MasterService, private alert: ToastrService, private router: Router,private modalservice:NgbModal) { }
+
+  @ViewChild('content') popupview !:ElementRef;
 
   Invoiceheader: any;
+  pdfurl='';
+  invoiceno:any;
 
   ngOnInit(): void {
     this.LoadInvoice();
@@ -61,5 +66,16 @@ export class ListingComponent implements OnInit {
      
      });
   }
+
+  PreviewInvoice(invoiceno: any){
+    this.invoiceno=invoiceno;
+    this.service.GenerateInvoicePDF(invoiceno).subscribe(res=>{
+     let blob:Blob=res.body as Blob;
+     let url=window.URL.createObjectURL(blob);
+     this.pdfurl=url;
+     this.modalservice.open(this.popupview,{size:'lg'});
+     //window.open(url);
+    });
+   }
 
 }

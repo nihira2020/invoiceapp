@@ -28,7 +28,7 @@
     <td style="width: 30%">
 <a class="btn btn-primary" (click)="Editinvoice(item.invoiceNo)">Edit</a> | 
 <a class="btn btn-danger" (click)="invoiceremove(item.invoiceNo)">Delete</a> |
-<a class="btn btn-success" (click)="PrintInvoice(item.invoiceNo)">Print</a> |
+<a class="btn btn-success" (click)="PreviewInvoice(item.invoiceNo)">Print</a> |
 <a class="btn btn-success" (click)="DownloadInvoice(item.invoiceNo)">Download</a>
     </td>
 
@@ -40,3 +40,17 @@
     </div>
 
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Preview Invoice : <b>{{invoiceno}}</b></h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<ngx-extended-pdf-viewer [src]="pdfurl"></ngx-extended-pdf-viewer>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-danger" (click)="d('Cross click')">Close</button>
+	</div>
+</ng-template>
+
