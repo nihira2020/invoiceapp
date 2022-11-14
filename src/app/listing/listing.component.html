@@ -25,9 +25,11 @@
     <td>{{item.total | currency}}</td>
     <td>{{item.tax | currency}}</td>
     <td>{{item.netTotal | currency}}</td>
-    <td style="width: 15%">
+    <td style="width: 30%">
 <a class="btn btn-primary" (click)="Editinvoice(item.invoiceNo)">Edit</a> | 
-<a class="btn btn-danger" (click)="invoiceremove(item.invoiceNo)">Delete</a>
+<a class="btn btn-danger" (click)="invoiceremove(item.invoiceNo)">Delete</a> |
+<a class="btn btn-success" (click)="PrintInvoice(item.invoiceNo)">Print</a> |
+<a class="btn btn-success" (click)="DownloadInvoice(item.invoiceNo)">Download</a>
     </td>
 
 </tr>

@@ -39,6 +39,11 @@ export class MasterService {
     return this.http.post('https://localhost:7118/Invoice/Save',invoicedata);
   }
 
+  GenerateInvoicePDF(invoiceno:any){
+    return this.http.get('https://localhost:7118/Invoice/generatepdf?InvoiceNo='+invoiceno,{observe:'response',responseType:'blob'});
+    
+  }
+
 
 
 }

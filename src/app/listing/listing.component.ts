@@ -42,5 +42,24 @@ export class ListingComponent implements OnInit {
   Editinvoice(invoiceno: any) {
     this.router.navigateByUrl('/editinvoice/' + invoiceno);
   }
+  PrintInvoice(invoiceno: any){
+   this.service.GenerateInvoicePDF(invoiceno).subscribe(res=>{
+    let blob:Blob=res.body as Blob;
+    let url=window.URL.createObjectURL(blob);
+    window.open(url);
+   });
+  }
+  DownloadInvoice(invoiceno: any){
+    this.service.GenerateInvoicePDF(invoiceno).subscribe(res=>{
+      let blob:Blob=res.body as Blob;
+      let url=window.URL.createObjectURL(blob);
+
+      let a=document.createElement('a');
+      a.download=invoiceno;
+      a.href=url;
+      a.click();
+     
+     });
+  }
 
 }
