@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RatingComponent } from './rating/rating.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer'
+import {DataTablesModule} from 'angular-datatables'
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer'
     HttpClientModule,
     ToastrModule.forRoot(),
     NgbModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
